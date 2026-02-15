@@ -20,9 +20,6 @@ const navItems = [
   { href: '/transfers', label: 'Transfers' },
   { href: '/manufacturing', label: 'Manufacturing' },
   { href: '/crm', label: 'CRM' },
-  // Keep Operations in nav to expose structured ERP workflows.
-  { href: '/operations', label: 'Operations' },
-  { href: '/master', label: 'Master Setup' },
 ]
 
 export default function AppLayout({ children }: AppLayoutProps) {
