@@ -20,7 +20,6 @@ const navItems = [
   { href: '/transfers', label: 'Transfers' },
   { href: '/manufacturing', label: 'Manufacturing' },
   { href: '/crm', label: 'CRM' },
-  { href: '/master', label: 'Master Setup' },
 ]
 
 export default function AppLayout({ children }: AppLayoutProps) {
