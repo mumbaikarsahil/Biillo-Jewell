@@ -3,10 +3,21 @@ import { supabase } from '@/lib/supabaseClient'
 import type { User } from '@supabase/supabase-js'
 
 export interface AppUser {
-  id: string
   user_id: string
-  name: string
+  company_id: string
   role: string
+}
+
+function getDisplayName(user: User | null, appUser: AppUser | null) {
+  if (!user) return 'Unknown User'
+  const metadataName = user.user_metadata?.full_name || user.user_metadata?.name
+  if (typeof metadataName === 'string' && metadataName.trim().length > 0) {
+    return metadataName
+  }
+  if (user.email) {
+    return user.email
+  }
+  return appUser?.user_id || 'Unknown User'
 }
 
 export function useAuth() {
@@ -43,5 +54,10 @@ export function useAuth() {
       .then(({ data }) => setAppUser(data as AppUser))
   }, [user])
 
-  return { user, appUser, loading }
+  return {
+    user,
+    appUser,
+    loading,
+    displayName: getDisplayName(user, appUser),
+  }
 }
