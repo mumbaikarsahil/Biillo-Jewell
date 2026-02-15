@@ -46,7 +46,6 @@ export default function Dashboard() {
       href: '/manufacturing',
       color: 'bg-purple-100 text-purple-600',
     },
-
     {
       title: 'Operations Center',
       description: 'All ERP forms organized by process level',
