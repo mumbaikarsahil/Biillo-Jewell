@@ -4,7 +4,7 @@ import { useAuth } from '@/hooks/useAuth'
 import AppLayout from '@/components/layout/AppLayout'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { BarChart3, Gem, HandCoins, Package, Settings2, ShoppingCart, Users } from 'lucide-react'
+import { BarChart3, Gem, HandCoins, Package, ShoppingCart, Users } from 'lucide-react'
 import Link from 'next/link'
 
 export default function Dashboard() {
@@ -45,13 +45,6 @@ export default function Dashboard() {
       icon: <BarChart3 className="w-8 h-8" />,
       href: '/manufacturing',
       color: 'bg-purple-100 text-purple-600',
-    },
-    {
-      title: 'Master Setup',
-      description: 'Company, warehouses, users, karigars, customers',
-      icon: <Settings2 className="w-8 h-8" />,
-      href: '/master',
-      color: 'bg-emerald-100 text-emerald-700',
     },
     {
       title: 'CRM',
