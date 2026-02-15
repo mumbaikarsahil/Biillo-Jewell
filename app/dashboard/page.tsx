@@ -4,11 +4,11 @@ import { useAuth } from '@/hooks/useAuth'
 import AppLayout from '@/components/layout/AppLayout'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { BarChart3, Users, Package, ShoppingCart } from 'lucide-react'
+import { BarChart3, Gem, HandCoins, Package, Settings2, ShoppingCart, Users } from 'lucide-react'
 import Link from 'next/link'
 
 export default function Dashboard() {
-  const { appUser } = useAuth()
+  const { appUser, displayName } = useAuth()
 
   const menuItems = [
     {
@@ -20,23 +20,44 @@ export default function Dashboard() {
     },
     {
       title: 'Scan Items',
-      description: 'Scan item barcodes',
+      description: 'Barcode lookup and validation',
       icon: <Package className="w-8 h-8" />,
       href: '/scan',
       color: 'bg-green-100 text-green-600',
     },
     {
-      title: 'Store Dashboard',
-      description: 'Store performance metrics',
+      title: 'Inventory',
+      description: 'Serialized stock by warehouse and status',
+      icon: <Gem className="w-8 h-8" />,
+      href: '/inventory',
+      color: 'bg-amber-100 text-amber-600',
+    },
+    {
+      title: 'Transfers',
+      description: 'HO / branch custody transfer operations',
+      icon: <HandCoins className="w-8 h-8" />,
+      href: '/transfers',
+      color: 'bg-cyan-100 text-cyan-600',
+    },
+    {
+      title: 'Manufacturing',
+      description: 'Job bag production monitoring',
       icon: <BarChart3 className="w-8 h-8" />,
-      href: '/dashboard/store',
+      href: '/manufacturing',
       color: 'bg-purple-100 text-purple-600',
     },
     {
-      title: 'Manager Panel',
-      description: 'Multi-branch overview',
+      title: 'Master Setup',
+      description: 'Company, warehouses, users, karigars, customers',
+      icon: <Settings2 className="w-8 h-8" />,
+      href: '/master',
+      color: 'bg-emerald-100 text-emerald-700',
+    },
+    {
+      title: 'CRM',
+      description: 'Customers, leads and follow-ups',
       icon: <Users className="w-8 h-8" />,
-      href: '/dashboard/manager',
+      href: '/crm',
       color: 'bg-orange-100 text-orange-600',
     },
   ]
@@ -46,10 +67,10 @@ export default function Dashboard() {
       <div>
         <h1 className="text-3xl font-bold mb-2">Welcome</h1>
         <p className="text-gray-600 mb-8">
-          {appUser ? `${appUser.name} • ${appUser.role}` : 'Loading...'}
+          {appUser ? `${displayName} • ${appUser.role}` : 'Loading...'}
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {menuItems.map(item => (
             <Link key={item.href} href={item.href}>
               <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer h-full">
