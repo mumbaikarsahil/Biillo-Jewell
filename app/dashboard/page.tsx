@@ -1,7 +1,8 @@
 'use client'
 
-import { useAuth } from '@/hooks/useAuth'
+import { useEffect, useMemo, useState } from 'react'
 import AppLayout from '@/components/layout/AppLayout'
+import { useAuth } from '@/hooks/useAuth'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { BarChart3, Gem, HandCoins, Package, ShoppingCart, Users } from 'lucide-react'
@@ -77,16 +78,24 @@ export default function Dashboard() {
           ))}
         </div>
 
-        {appUser?.role === 'ceo' && (
-          <Card className="mt-8 p-6 bg-amber-50 border-amber-200">
-            <h3 className="font-bold text-lg mb-4">Executive Dashboard</h3>
-            <Button asChild>
-              <Link href="/dashboard/ceo">
-                View CEO Dashboard
-              </Link>
-            </Button>
-          </Card>
-        )}
+        <QuickAccessBar />
+
+        <div className="grid grid-cols-1 xl:grid-cols-4 gap-5">
+          <div className="xl:col-span-1">
+            <DashboardSidebar />
+          </div>
+          <div className="xl:col-span-3">
+            {loading ? (
+              <Card className="p-6 rounded-2xl">Loading dashboard...</Card>
+            ) : error ? (
+              <Card className="p-6 rounded-2xl text-red-600">{error}</Card>
+            ) : !DashboardComponent ? (
+              <Card className="p-6 rounded-2xl">No dashboard is configured for your role.</Card>
+            ) : (
+              <DashboardComponent data={data} />
+            )}
+          </div>
+        </div>
       </div>
     </AppLayout>
   )
